@@ -17,26 +17,48 @@ const template = (
   </div>
 );
 
-const user = {
-  name: 'Andrew',
-  age: 19,
-  location: 'New York'
-};
+// const user = {
+//   name: 'Andrew',
+//   age: 19,
+//   location: 'New York'
+// };
 
-function getLocation(location) {
-    if(location){
-        return <p>Location: {location}</p>;
-    }
+// function getLocation(location) {
+//     if(location){
+//         return <p>Location: {location}</p>;
+//     }
+// }
+
+// const templateTwo = (
+//   <div>
+//     <h1>{user.name ? user.name : 'Anonymous'}</h1>
+//     {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
+//     {getLocation(user.location)}
+//   </div>
+// );
+
+let count = 0;
+const addOne = () => {
+  return count = count+1;
+}
+
+const removeOne = () => {
+  return count = count-1;
+}
+
+const reset = () => {
+  return count = 0;
 }
 
 const templateTwo = (
-  <div>
-    <h1>{user.name ? user.name : 'Anonymous'}</h1>
-    {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-    {getLocation(user.location)}
+  <div style={{width: '25%'}}>
+    <h1>Counter : {count}</h1>
+    <button style={{width: '33%'}} onClick={addOne}>+1</button>
+    <button style={{width: '33%'}} onClick={removeOne}>-1</button>
+    <button style={{width: '33%'}} onClick={reset}>reset</button>
   </div>
 );
 
 const appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateTwo, appRoot);

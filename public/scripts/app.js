@@ -1,42 +1,109 @@
 'use strict';
 
-var add = function add(a, b) {
-    // console.log(arguments);
-    return a + b;
+console.log('App.js is running!');
+
+var app = {
+  title: 'Indecision App',
+  subtitle: 'Put your life in the hands of a computer',
+  options: ['One', 'Two']
 };
-console.log(add(55, 5));
+var template = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    app.title
+  ),
+  app.subtitle && React.createElement(
+    'p',
+    null,
+    app.subtitle
+  ),
+  app.options.length > 0 ? React.createElement(
+    'p',
+    null,
+    'Here are your options'
+  ) : React.createElement(
+    'p',
+    null,
+    'No options'
+  ),
+  React.createElement(
+    'ol',
+    null,
+    React.createElement(
+      'li',
+      null,
+      app.options[0]
+    ),
+    React.createElement(
+      'li',
+      null,
+      app.options[1]
+    )
+  )
+);
 
-var user = {
-    name: 'Andrew',
-    cities: ['Philly', 'New York', 'Dublin'],
-    printPlacesLived: function printPlacesLived() {
-        var _this = this;
+// const user = {
+//   name: 'Andrew',
+//   age: 19,
+//   location: 'New York'
+// };
 
-        return this.cities.map(function (city) {
-            return _this.name + " has lived in " + city + "!";
-        });
+// function getLocation(location) {
+//     if(location){
+//         return <p>Location: {location}</p>;
+//     }
+// }
 
-        // this.cities.forEach((city) => {
-        //     console.log(this.name + ' has lived in ' + city);
-        // });
-    }
+// const templateTwo = (
+//   <div>
+//     <h1>{user.name ? user.name : 'Anonymous'}</h1>
+//     {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
+//     {getLocation(user.location)}
+//   </div>
+// );
+
+var count = 0;
+var addOne = function addOne() {
+  return count = count + 1;
 };
-console.log(user.printPlacesLived());
 
-// Challenge
-
-var multiplier = {
-    // numbers - array of numbers
-    // multiplyBy - single number 
-    // multiply - return array numbers multiplied
-    numbers: [1, 2, 3],
-    multiplyBy: 2,
-    multiply: function multiply() {
-        var _this2 = this;
-
-        return this.numbers.map(function (number) {
-            return number * _this2.multiplyBy;
-        });
-    }
+var removeOne = function removeOne() {
+  return count = count - 1;
 };
-console.log(multiplier.multiply()); // [1, 2, 3] - 2 - [2, 4, 6]
+
+var reset = function reset() {
+  return count = 0;
+};
+
+var templateTwo = React.createElement(
+  'div',
+  { style: { width: '25%' } },
+  React.createElement(
+    'h1',
+    null,
+    'Counter : ',
+    count
+  ),
+  React.createElement(
+    'button',
+    { style: { width: '33%' }, onClick: addOne },
+    '+1'
+  ),
+  React.createElement(
+    'button',
+    { style: { width: '33%' }, onClick: removeOne },
+    '-1'
+  ),
+  React.createElement(
+    'button',
+    { style: { width: '33%' }, onClick: reset },
+    'reset'
+  )
+);
+
+var appRoot = document.getElementById('app');
+
+ReactDOM.render(templateTwo, appRoot);
