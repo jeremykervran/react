@@ -5,8 +5,29 @@ console.log('App.js is running!');
 var app = {
   title: 'Indecision App',
   subtitle: 'Put your life in the hands of a computer',
-  options: ['One', 'Two']
+  options: []
 };
+
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault();
+  var option = e.target.elements.option.value;
+  console.log(app.options);
+
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+  }
+};
+
+var clearOptions = function clearOptions() {
+  if (app.options.length > 0) app.options = [];
+};
+
+var removeLastOption = function removeLastOption() {
+  var indexLast = app.options.length - 1;
+  if (app.options[indexLast]) app.options.splice(indexLast, 1);
+};
+
 var template = React.createElement(
   'div',
   null,
@@ -35,75 +56,36 @@ var template = React.createElement(
     React.createElement(
       'li',
       null,
-      app.options[0]
+      'Item 1'
     ),
     React.createElement(
       'li',
       null,
-      app.options[1]
+      'Item 2'
+    ),
+    React.createElement(
+      'form',
+      { onSubmit: onFormSubmit },
+      React.createElement('input', { type: 'text', name: 'option' }),
+      React.createElement(
+        'button',
+        null,
+        'Add option'
+      ),
+      React.createElement(
+        'button',
+        { onClick: removeLastOption },
+        'Remove last option'
+      ),
+      React.createElement(
+        'button',
+        { onClick: clearOptions },
+        'Clear'
+      )
     )
-  )
-);
-
-// const user = {
-//   name: 'Andrew',
-//   age: 19,
-//   location: 'New York'
-// };
-
-// function getLocation(location) {
-//     if(location){
-//         return <p>Location: {location}</p>;
-//     }
-// }
-
-// const templateTwo = (
-//   <div>
-//     <h1>{user.name ? user.name : 'Anonymous'}</h1>
-//     {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-//     {getLocation(user.location)}
-//   </div>
-// );
-
-var count = 0;
-var addOne = function addOne() {
-  return count = count + 1;
-};
-
-var removeOne = function removeOne() {
-  return count = count - 1;
-};
-
-var reset = function reset() {
-  return count = 0;
-};
-
-var templateTwo = React.createElement(
-  'div',
-  { style: { width: '25%' } },
-  React.createElement(
-    'h1',
-    null,
-    'Counter : ',
-    count
-  ),
-  React.createElement(
-    'button',
-    { style: { width: '33%' }, onClick: addOne },
-    '+1'
-  ),
-  React.createElement(
-    'button',
-    { style: { width: '33%' }, onClick: removeOne },
-    '-1'
-  ),
-  React.createElement(
-    'button',
-    { style: { width: '33%' }, onClick: reset },
-    'reset'
   )
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);
