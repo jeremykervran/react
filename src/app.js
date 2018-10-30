@@ -34,13 +34,13 @@ const template = (
     <ol>
       <li>Item 1</li>
       <li>Item 2</li>
-      <form onSubmit={onFormSubmit}>
+    </ol>
+    <form onSubmit={onFormSubmit}>
         <input type="text" name="option"/>
         <button>Add option</button>
         <button onClick={removeLastOption}>Remove last option</button>
         <button onClick={clearOptions}>Clear</button>
       </form>
-    </ol>
   </div>
 );
 
